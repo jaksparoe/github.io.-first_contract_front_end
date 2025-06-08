@@ -2,12 +2,12 @@ import './App.css';
 import { TonConnectButton } from '@tonconnect/ui-react';
 import { useMainContract } from "./hooks/useMainContract";
 
-
 function App() {
-  const { contract_address, counter_value, recent_sender, owner_address, contract_balance } = useMainContract();
-  
+  // Only destructure what your hook actually returns
+  const { contract_address, counter_value } = useMainContract();
+
   return (
-     <div>
+    <div>
       <div>
         <TonConnectButton />
       </div>
@@ -15,8 +15,6 @@ function App() {
         <div className='Card'>
           <b>Our contract Address</b>
           <div className='Hint'>{contract_address?.slice(0, 30) + "..."}</div>
-          <b>Our contract Balance</b>
-          <div className='Hint'>{contract_balance}</div>
         </div>
 
         <div className='Card'>
@@ -26,27 +24,6 @@ function App() {
       </div>
     </div>
   );
-}
-function App() {
-    
-    const { ..., sendIncrement } = useMainContract();
-    const { connected } = useTonConnect()
-    
-    return (
-        // ... other HTML code
-            
-            {connected && (
-              <a
-                onClick={() => {
-                  sendIncrement();
-                }}
-              >
-                Increment
-              </a>
-            )}
-        
-        // ... other HTML code
-    )
 }
 
 export default App;
